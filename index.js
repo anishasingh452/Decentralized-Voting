@@ -4,14 +4,12 @@ const { Sequelize, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 
-// Create single sequelize instance
 const sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: './database.sqlite',
     logging: false
 });
 
-// Define Admin model inline
 const Admin = sequelize.define('Admin', {
     username: {
         type: DataTypes.STRING,
@@ -24,7 +22,6 @@ const Admin = sequelize.define('Admin', {
     }
 });
 
-// Define Voter model inline
 const Voter = sequelize.define('Voter', {
     loginId: {
         type: DataTypes.STRING,
@@ -40,7 +37,6 @@ const Voter = sequelize.define('Voter', {
 app.use(cors());
 app.use(express.json());
 
-// Routes
 app.post('/register/admin', async (req, res) => {
     const { username, password } = req.body;
     try {
@@ -89,7 +85,6 @@ app.post('/login/voter', async (req, res) => {
     }
 });
 
-// Sync database and start server
 sequelize.sync().then(() => {
     console.log('Database synced');
     app.listen(8080, () => {
