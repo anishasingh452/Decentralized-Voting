@@ -16,7 +16,7 @@ contract Voting {
     uint public candidateCount;
 
     mapping(address => bool) public hasVoted;
-    address[] public voterList; // Track all voters
+    address[] public voterList; 
 
     event CandidateRegistered(uint id, string name);
     event VoteCasted(address voter, uint candidateId);
@@ -57,19 +57,16 @@ contract Voting {
     function resetElection() public onlyAdmin {
         require(electionEnded, "Election is ongoing");
         
-        // Clear candidates
         for (uint i = 1; i <= candidateCount; i++) {
             delete candidates[i];
         }
         candidateCount = 0;
 
-        // Clear all voters
         for (uint i = 0; i < voterList.length; i++) {
             hasVoted[voterList[i]] = false;
         }
-        delete voterList; // Clear the voter list array
+        delete voterList; 
 
-        // Reset election state
         electionStarted = false;
         electionEnded = false;
     }
@@ -80,7 +77,7 @@ contract Voting {
         
         candidates[candidateId].voteCount++;
         hasVoted[msg.sender] = true;
-        voterList.push(msg.sender); // Track this voter
+        voterList.push(msg.sender); 
         
         emit VoteCasted(msg.sender, candidateId);
     }
