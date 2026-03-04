@@ -3,7 +3,7 @@ const sequelize = new Sequelize({ dialect: 'sqlite', storage: 'database.sqlite' 
 
 const Admin = sequelize.define('Admin', {
     username: { type: DataTypes.STRING, unique: true },
-    password: DataTypes.STRING // Will hash later!
+    password: DataTypes.STRING 
 });
 
 const Voter = sequelize.define('Voter', {
